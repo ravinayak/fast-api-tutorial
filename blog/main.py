@@ -31,7 +31,7 @@ def blogs(response: Response, db: Session = Depends(get_db)):
     return blogs
 
 @app.get('/blog/{id}')
-def show(id: int, response: Response, db: Session = Depends(get_db)):
+def show(id: int, _response: Response, db: Session = Depends(get_db)):
     blog = db.query(models.Blog).filter(models.Blog.id == id).first()
     if not blog:
         raise HTTPException(status_code = status.HTTP_404_NOT_FOUND, detail = f'No blog with {id} found')
